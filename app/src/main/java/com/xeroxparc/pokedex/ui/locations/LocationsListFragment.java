@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.xeroxparc.pokedex.R;
 import com.xeroxparc.pokedex.data.filtering.FilterableResourceProvider;
@@ -48,11 +49,11 @@ public class LocationsListFragment extends SearchableFragment {
     public void setImageSlider(String regionName, List<SlideModel> slideModels) {
         // Pass name of drawable image for get and set maps
         int resIdMap1 = getResources().getIdentifier("image_region_" + regionName + "1", "drawable", getContext().getPackageName());
-        slideModels.add(new SlideModel(resIdMap1));
+        slideModels.add(new SlideModel(resIdMap1, ScaleTypes.FIT));
         if (!regionName.equals("alola") && !regionName.equals("kalos")) {
             // Alola and Kalos Region have only 1 map
             int resIdMap2 = getResources().getIdentifier("image_region_" + regionName + "2", "drawable", getContext().getPackageName());
-            slideModels.add(new SlideModel(resIdMap2));
+            slideModels.add(new SlideModel(resIdMap2, ScaleTypes.FIT));
         }
     }
 
@@ -71,7 +72,7 @@ public class LocationsListFragment extends SearchableFragment {
                         String formattedRegionName = String.format("%s %s", getString(R.string.locations_list_region_title), Character.toUpperCase(retreivedRegion.getName().charAt(0)) + retreivedRegion.getName().substring(1));
                         textViewRegionName.setText(formattedRegionName);
                         setImageSlider(retreivedRegion.getName(), slideModels);
-                        imageSlider.setImageList(slideModels, true);
+                        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
                     });
         });
     }

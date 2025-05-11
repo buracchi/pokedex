@@ -132,18 +132,15 @@ public class EggGroupDetailsBinder implements
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.show_all_pokemon:
-                speciesListAdapter.getFilter(FilterMode.MODE_ALL).filter("");
-                break;
-            case R.id.show_pokemon_only_in_this_group:
-                speciesListAdapter.getFilter(FilterMode.MODE_ONLY_UNIQUE_EGG_GROUP).filter("");
-                break;
-            case R.id.show_pokemon_in_this_group_and_others:
-                speciesListAdapter.getFilter(FilterMode.MODE_UNIQUE_AND_OTHER_EGG_GROUPS).filter("");
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + view.getId());
+        int id = view.getId();
+        if (id == R.id.show_all_pokemon) {
+            speciesListAdapter.getFilter(FilterMode.MODE_ALL).filter("");
+        } else if (id == R.id.show_pokemon_only_in_this_group) {
+            speciesListAdapter.getFilter(FilterMode.MODE_ONLY_UNIQUE_EGG_GROUP).filter("");
+        } else if (id == R.id.show_pokemon_in_this_group_and_others) {
+            speciesListAdapter.getFilter(FilterMode.MODE_UNIQUE_AND_OTHER_EGG_GROUPS).filter("");
+        } else {
+            throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
 }
